@@ -1,10 +1,13 @@
 import {createStore, combineReducers} from 'redux'
 import { postsReduser } from '../redusers/postsReduser';
+import { IPostsState } from '../redusers/postsReduser'
+
+export interface IStore{
+    posts: IPostsState;
+}
 
 
-
-
-const store = createStore(
+const store: IStore = createStore(
     combineReducers ({
         posts: postsReduser,
     }),

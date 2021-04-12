@@ -1,12 +1,22 @@
+import { IOnePost } from './../../posts';
 import {POST_FETCHING, POST_SUCCESS, POST_ERROR} from '../actions/postAction'
 
+export interface IPostsState {
+    isloading: boolean;
+    data: IOnePost[]    
+}
 
-const initialState = {
+interface IAction {
+    type: string;
+    payload: IOnePost[];
+}
+
+const initialState: IPostsState = {
     isloading: false,
     data: []
 };
 
-export const postsReduser = (state = initialState, action: any) => {
+export const postsReduser = (state: IPostsState = initialState, action: IAction) => {
     switch (action.type) {
         case POST_FETCHING:
             return {...state, isloading: true} ;
