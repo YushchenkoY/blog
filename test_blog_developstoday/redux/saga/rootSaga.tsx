@@ -1,14 +1,18 @@
 import { all, call, delay, put, take, takeLatest, takeEvery } from 'redux-saga/effects'
 import { POST_FETCHING,  success, error} from '../actions/postAction'
-
+import axios from 'axios';
 
 function* fetchData() {
     try {
-        const posts = yield call(fetch, 'https://bloggy-api.herokuapp.com/posts')
-        yield put(success(posts))
+        // console.log('asdfasdf');
+
+        const response = yield axios.get('https://simple-blog-api.crew.red/posts');
+        console.log(response);
+
+        yield put(success(response.data))
     }
     catch(err) {
-        yield put(error())
+        // yield put(error())
     }
 }
 
