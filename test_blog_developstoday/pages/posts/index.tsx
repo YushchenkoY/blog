@@ -27,8 +27,8 @@ export default function Posts() {
                         <li>
                             <Link href={'/posts/'+post.id} key={post.id} >
                                 <a>
-                                    {post.title}
-                                    {croppedBody}
+                                    <h3>{post.title}</h3>
+                                    <p>{croppedBody}</p>
                                 </a>
                             </Link>
                         </li>

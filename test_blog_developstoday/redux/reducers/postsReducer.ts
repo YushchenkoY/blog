@@ -1,5 +1,5 @@
 import { Post, PostWithComment } from '../../types/posts';
-import {POST_FETCHING, POST_SUCCESS, POST_ERROR, POST_DETAILS_FETCHING, POST_DETAILS_SUCCESS,SEND_COMMENT_SUCCESS ,  POST_DETAILS_ERROR} from '../actions/postAction'
+import {POST_FETCHING, POST_SUCCESS, POST_ERROR, POST_DETAILS_FETCHING, POST_DETAILS_SUCCESS,SEND_COMMENT_SUCCESS ,  SEND_POST_SUCCESS, POST_DETAILS_ERROR} from '../actions/postAction'
 
 export interface IPostsState {
     isloading: boolean;
@@ -54,6 +54,21 @@ export const postsReduser = (state: IPostsState = initialState, action: IAction)
                 },
                 
             };
+
+        case SEND_POST_SUCCESS:
+            return {
+                ...state,
+                isloading: false,
+                data: [
+                    ...state.data,
+                    action.payload,
+                ],
+            };
+
+
+
+
+
         default:
             return state;
     }
