@@ -1,4 +1,4 @@
-import { IOnePost } from './../../type/posts';
+import { IOnePost } from '../../types/posts';
 import {POST_FETCHING, POST_SUCCESS, POST_ERROR} from '../actions/postAction'
 
 export interface IPostsState {

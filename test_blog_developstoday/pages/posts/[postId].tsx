@@ -8,7 +8,6 @@ export default function Post() {
     return (
         <MainLayout page={"Post"}>
             <div>one post</div>
-
             <button onClick={()=>Router.push(ROUTES.posts)}>Back to all posts</button>
         </MainLayout>
     )
