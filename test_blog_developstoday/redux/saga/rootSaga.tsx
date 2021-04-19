@@ -1,6 +1,8 @@
 import { all, call, delay, put, take, takeLatest, takeEvery } from 'redux-saga/effects'
-import { POST_FETCHING,  success, error} from '../actions/postAction'
+import { POST_FETCHING, POST_DETAILS_FETCHING, SEND_COMMENT_REQ, success, error} from '../actions/postAction'
 import axios from 'axios';
+import postDetailsSaga from './postDetailsSaga';
+import commentsSaga from './commentsSaga';
 
 function* fetchData() {
     try {
@@ -20,7 +22,9 @@ function* fetchData() {
 
 function* rootSaga() {
     yield all([
-        takeEvery(POST_FETCHING, fetchData)
+        takeEvery(POST_FETCHING, fetchData),
+        takeEvery(POST_DETAILS_FETCHING, postDetailsSaga),
+        takeEvery(SEND_COMMENT_REQ, commentsSaga),
     ])
 }
 

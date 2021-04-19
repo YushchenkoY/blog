@@ -1,9 +1,10 @@
-import { Post } from '../../types/posts';
-import {POST_FETCHING, POST_SUCCESS, POST_ERROR} from '../actions/postAction'
+import { Post, PostWithComment } from '../../types/posts';
+import {POST_FETCHING, POST_SUCCESS, POST_ERROR, POST_DETAILS_FETCHING, POST_DETAILS_SUCCESS,SEND_COMMENT_SUCCESS ,  POST_DETAILS_ERROR} from '../actions/postAction'
 
 export interface IPostsState {
     isloading: boolean;
-    data: Post[]    
+    data: Post[];
+    details: PostWithComment;
 }
 
 interface IAction {
@@ -13,7 +14,8 @@ interface IAction {
 
 const initialState: IPostsState = {
     isloading: false,
-    data: []
+    data: [],
+    details: null
 };
 
 export const postsReduser = (state: IPostsState = initialState, action: IAction) => {
@@ -21,9 +23,37 @@ export const postsReduser = (state: IPostsState = initialState, action: IAction)
         case POST_FETCHING:
             return {...state, isloading: true} ;
         case POST_SUCCESS:
-            return {...state, data: action.payload};
+            return {
+                ...state,
+                isloading: false, 
+                data: action.payload};
         case POST_ERROR:
-            return ;
+            return state;
+        case POST_DETAILS_FETCHING:
+            return {...state, isloading: true};
+            
+        case POST_DETAILS_SUCCESS:
+            return {
+                ...state,
+                isloading: false,
+                details: action.payload,
+                
+            };
+            
+            
+        case SEND_COMMENT_SUCCESS:
+            return {
+                ...state,
+                isloading: false,
+                details: {
+                    ...state.details,
+                    comments: [
+                        ...state.details.comments,
+                        action.payload,
+                    ]
+                },
+                
+            };
         default:
             return state;
     }
